@@ -1,6 +1,7 @@
 package net.media.training.designpattern.adapter.thirdparty;
 
 import net.media.training.designpattern.adapter.Employee;
+import net.media.training.designpattern.adapter.LeaveRecord;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Stack;
  * Time: 4:59:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public final class ThirdPartyLeaveRecord {
+public final class ThirdPartyLeaveRecord  {
     private Map<Employee, Integer> employees = new Hashtable<Employee, Integer>() {
         {
             put(new Employee("Bond, James"), 5);

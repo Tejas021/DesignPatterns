@@ -8,11 +8,11 @@ package net.media.training.designpattern.adapter;
  * To change this template use File | Settings | File Templates.
  */
 public class SalaryDisberser {
-    private LeaveRecord leaveRecord;
+    private ThirdPartyLeaveRecordAdapter leaveRecord;
     private int SALARY = 15000;
 
-    public SalaryDisberser(LeaveRecord leaveRecord) {
-        this.leaveRecord = leaveRecord;
+    public SalaryDisberser(ThirdPartyLeaveRecordAdapter leaveRecordAdapter) {
+        this.leaveRecord = leaveRecordAdapter;
     }
 
     public int salary(String employeeName) {

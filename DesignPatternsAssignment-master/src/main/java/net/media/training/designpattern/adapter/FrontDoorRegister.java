@@ -8,9 +8,9 @@ package net.media.training.designpattern.adapter;
  * To change this template use File | Settings | File Templates.
  */
 public class FrontDoorRegister {
-    private LeaveRecord leaveRecord;
+    private ThirdPartyLeaveRecordAdapter leaveRecord;
 
-    public FrontDoorRegister(LeaveRecord leaveRecord) {
+    public FrontDoorRegister(ThirdPartyLeaveRecordAdapter leaveRecord) {
         this.leaveRecord = leaveRecord;
     }
 
