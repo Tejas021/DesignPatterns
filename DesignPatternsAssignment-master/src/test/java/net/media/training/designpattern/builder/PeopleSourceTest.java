@@ -21,7 +21,7 @@ public class PeopleSourceTest {
     public void TestPeopleXml() {
         List<Person> persons = new ArrayList<Person>();
         persons.add(new Person.Builder("Wu",25).setCity("Shanghai").setCountry("China").build());
-        persons.add(new Person.Builder("Kobayashi",200).setCity("Shanghai").setCountry("China").build());
+        persons.add(new Person.Builder("Kobayashi",200).setCity("Shanghai").build());
 
         String actual = PeopleDataSource.getPeopleXml(persons);
 

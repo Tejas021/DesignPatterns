@@ -10,15 +10,14 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class PeopleDataSource {
+
+
+
     public static String getPeopleXml(List<Person> persons) {
-        String finalXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        finalXML += "<People number=\"" + persons.size() + "\">";
+        XmlBuilder xmlBuilder = new XMLPeopleBuilder();
         for (Person person : persons) {
-            finalXML += "<Person id=\"" + person.getId() + "\" name=\"" + person.getName() + "\">" +
-                    "<Address><City>" + person.getCity() + "</City><Country>" + person.getCountry() + "</Country></Address>" +
-                    "</Person>";
+            xmlBuilder.addPerson(person);
         }
-        finalXML += "</People>";
-        return finalXML;
+        return xmlBuilder.getXml();
     }
 }

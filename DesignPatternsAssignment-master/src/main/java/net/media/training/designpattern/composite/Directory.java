@@ -57,7 +57,7 @@ public class Directory implements FileSystemComponent{
 
         return sum;
     }
-
+//
 //    public int getSize() {
 //        return getSize(this);
 //    }
@@ -80,13 +80,29 @@ public class Directory implements FileSystemComponent{
 //        directoryToDelete.getParent().removeEntry(directoryToDelete);
 //    }
 
-//    public void delete() {
-//        delete(this);
-//    }
+    public void delete(FileSystemComponent component) {
+        components.remove(component);
+    }
+
+    public void delete() {
+        delete(this);
+    }
 
 //    public void removeEntry(File file) {
 //        files.remove(file);
 //    }
+
+    public boolean componentExists(String name, FileSystemComponent directoryToSearch) {
+        if (directoryToSearch.getName().equals(name))
+            return true;
+
+        for (FileSystemComponent component : components) {
+            if (component.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void removeEntry(FileSystemComponent component) {
         components.remove(component);
