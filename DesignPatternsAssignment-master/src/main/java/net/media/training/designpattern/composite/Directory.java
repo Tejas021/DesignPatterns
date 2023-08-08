@@ -80,12 +80,28 @@ public class Directory implements FileSystemComponent{
 //        directoryToDelete.getParent().removeEntry(directoryToDelete);
 //    }
 
-    public void delete(FileSystemComponent component) {
-        components.remove(component);
+    private void recursivelyDelete(Directory component) {
+        List<FileSystemComponent> copyComponents = new ArrayList(component.getComponents());
+
+        for (FileSystemComponent comp : copyComponents) {
+            if (comp instanceof Directory) {
+                recursivelyDelete((Directory)comp);
+            } else {
+                components.remove(comp);
+            }
+        }
+
+        if (component.getParent() != null) {
+            component.getParent().removeEntry(component);
+        }
     }
 
+    // ... (other methods)
+
+
+
     public void delete() {
-        delete(this);
+        recursivelyDelete(this);
     }
 
 //    public void removeEntry(File file) {
