@@ -9,6 +9,17 @@ package net.media.training.designpattern.strategy;
  */
 public class Employee extends GenericEmployee {
     private int maxAllowedLeaves;
+    IntegerValidationStrategy maxAllowedLeavesStrategy;
+
+
+    Employee(StringValidationStrategy nameStrategy,
+             IntegerValidationStrategy salaryStrategy,
+             StringValidationStrategy managerNameStrategy,
+             IntegerValidationStrategy monthsSpentStrategy,
+             IntegerValidationStrategy maxAllowedLeavesStrategy) {
+        super(nameStrategy, salaryStrategy, managerNameStrategy, monthsSpentStrategy);
+        this.maxAllowedLeavesStrategy=maxAllowedLeavesStrategy;
+    }
 
     @Override
     public void setSalary(int salary) {
@@ -23,7 +34,7 @@ public class Employee extends GenericEmployee {
     }
 
     public void setMaxAllowedLeaves(int leaves) {
-        atLeast(leaves, 1);
+        maxAllowedLeavesStrategy.validate(leaves);
         this.maxAllowedLeaves = leaves;
     }
 }

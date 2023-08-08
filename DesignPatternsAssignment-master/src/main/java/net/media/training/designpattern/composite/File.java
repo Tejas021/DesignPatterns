@@ -17,6 +17,7 @@ public class File implements FileSystemComponent{
         this.size = size;
     }
 
+
     public void setParent(Directory parent) {
         this.parent = parent;
     }

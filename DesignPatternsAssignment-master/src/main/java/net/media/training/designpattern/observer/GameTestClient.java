@@ -1,5 +1,8 @@
 package net.media.training.designpattern.observer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameTestClient {
     public Person person;
     public Sun sun;
@@ -14,7 +17,15 @@ public class GameTestClient {
         cat = new Cat();
         robot = new Robot();
 
-        sun = new Sun(robot, person, dog, cat);
+        List<Character> characters = new ArrayList();
+        characters.add(person);
+        characters.add(dog);
+        characters.add(cat);
+        characters.add(robot);
+
+        Sun sun = new Sun(characters);
+
+
         game = new Game(sun);
     }
 
@@ -26,14 +37,11 @@ public class GameTestClient {
     }
 
     public void everyoneOutdoorsComesIn() {
-        if (person.isOutdoors())
-            person.goIndoors();
-        if (robot.isOutdoors())
-            robot.goIndoors();
-        if (cat.isOutdoors())
-            cat.goIndoors();
-        if (dog.isOutdoors())
-            dog.goIndoors();
+        for (Character character : sun.characters) {
+            if (character.isOutdoors())
+                character.goIndoors();
+        }
+
     }
 
     public void tickOnce() {
@@ -46,23 +54,16 @@ public class GameTestClient {
     }
 
     public boolean outdoorsCharactersFeelWarm() {
-        if (person.isOutdoors() && !person.isFeelingWarm())
-            return false;
-        if (cat.isOutdoors() && !cat.isFeelingWarm())
-            return false;
-        if (dog.isOutdoors() && !dog.isFeelingWarm())
-            return false;
-        if (robot.isOutdoors() && !robot.isFeelingWarm())
-            return false;
 
-        if (!person.isOutdoors() && person.isFeelingWarm())
-            return false;
-        if (!cat.isOutdoors() && cat.isFeelingWarm())
-            return false;
-        if (!dog.isOutdoors() && dog.isFeelingWarm())
-            return false;
-        if (!robot.isOutdoors() && robot.isFeelingWarm())
-            return false;
+        for (Character character : sun.characters) {
+            if (character.isOutdoors() && !character.isFeelingWarm())
+                return false;
+        }
+
+        for (Character character : sun.characters) {
+            if (!character.isOutdoors() && character.isFeelingWarm())
+                return false;
+        }
 
         return true;
     }

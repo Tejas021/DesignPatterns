@@ -7,7 +7,7 @@ package net.media.training.designpattern.observer;
  * Time: 10:16:31 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Robot {
+public class Robot implements Character{
     private boolean outdoors;
     private boolean feelingWarm;
     private boolean feelingTired;
@@ -41,4 +41,5 @@ public class Robot {
     public boolean isFeelingTired() {
         return feelingTired;
     }
+
 }

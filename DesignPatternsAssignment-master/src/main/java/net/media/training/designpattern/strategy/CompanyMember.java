@@ -13,36 +13,52 @@ public abstract class CompanyMember {
     protected int salary;
     protected int monthsSpent;
 
-    protected void validateLength(String val, int allowedLength) {
-        if (val.length() > allowedLength)
-            throw new RuntimeException("Invalid length:" + allowedLength);
+    StringValidationStrategy nameStrategy;
+    IntegerValidationStrategy salaryStrategy;
+
+    StringValidationStrategy managerNameStrategy;
+
+    CompanyMember(
+            StringValidationStrategy nameStrategy,
+            IntegerValidationStrategy salaryStrategy,
+            StringValidationStrategy managerNameStrategy
+    ){
+        this.nameStrategy=nameStrategy;
+        this.salaryStrategy=salaryStrategy;
+        this.managerNameStrategy=managerNameStrategy;
+
     }
 
-    protected void notEmpty(String val) {
-        if (val == null || val.length() == 0)
-            throw new RuntimeException("not empty check failed for value:" + val);
-    }
-
-    protected void atLeast(int val, int min) {
-        if (val < min)
-            throw new RuntimeException("at least check failed:" + val);
-    }
-
-    protected void atMost(int val, int max) {
-        if (val > max)
-            throw new RuntimeException("at least check failed:" + val);
-    }
+//    protected void validateLength(String val, int allowedLength) {
+//        if (val.length() > allowedLength)
+//            throw new RuntimeException("Invalid length:" + allowedLength);
+//    }
+//
+//    protected void notEmpty(String val) {
+//        if (val == null || val.length() == 0)
+//            throw new RuntimeException("not empty check failed for value:" + val);
+//    }
+//
+//    protected void atLeast(int val, int min) {
+//        if (val < min)
+//            throw new RuntimeException("at least check failed:" + val);
+//    }
+//
+//    protected void atMost(int val, int max) {
+//        if (val > max)
+//            throw new RuntimeException("at least check failed:" + val);
+//    }
 
     public void setName(String name) {
-        validateLength(name, 50);
+        nameStrategy.validate(name);
         this.name = name;
     }
 
     public void setSalary(int salary) {
-        atLeast(salary, 1);
+        salaryStrategy.validate(salary);
     }
 
     public void setManagerName(String name) {
-        validateLength(name, 50);
+        managerNameStrategy.validate(name);
     }
 }

@@ -10,22 +10,40 @@ package net.media.training.designpattern.strategy;
 public class SeniorEmployee extends GenericEmployee {
     private int setMaxBonus;
 
+   IntegerValidationStrategy seniorEmployeeSalaryStrategy;
+   IntegerValidationStrategy   seniorEmployeeMonthsSpentStrategy;
+    IntegerValidationStrategy seniorEmployeeMaxBonusStrategy;
+    SeniorEmployee(StringValidationStrategy nameStrategy,
+                   IntegerValidationStrategy salaryStrategy,
+                   StringValidationStrategy managerNameStrategy,
+                   IntegerValidationStrategy monthsSpentStrategy,
+                   IntegerValidationStrategy seniorEmployeeSalaryStrategy,
+                   IntegerValidationStrategy seniorEmployeeMonthsSpentStrategy,
+                   IntegerValidationStrategy seniorEmployeeMaxBonusStrategy ){
+
+        super(nameStrategy,salaryStrategy,managerNameStrategy,monthsSpentStrategy);
+        this.seniorEmployeeSalaryStrategy=seniorEmployeeSalaryStrategy;
+        this.seniorEmployeeMonthsSpentStrategy=seniorEmployeeMonthsSpentStrategy;
+        this.seniorEmployeeMaxBonusStrategy=seniorEmployeeMaxBonusStrategy;
+
+    }
+
     @Override
     public void setSalary(int salary) {
         super.setSalary(salary);
-        atLeast(salary, 200);
+        seniorEmployeeMaxBonusStrategy.validate(salary);
         this.salary = salary;
     }
 
     @Override
     public void setMonthsSpent(int months) {
         super.setMonthsSpent(months);
-        atLeast(months, 60);
+        seniorEmployeeMonthsSpentStrategy.validate(months);
         this.monthsSpent = months;
     }
 
     public void setMaxBonus(int bonus) {
-        atLeast(bonus, 1);
+        seniorEmployeeMaxBonusStrategy.validate(bonus);
         this.setMaxBonus = bonus;
     }
 }
